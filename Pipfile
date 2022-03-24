@@ -11,3 +11,4 @@ wagtail = { version = "2.16.1" }
 
 [dev-packages]
 nose = '*'
+django-debug-toolbar = "*"
