@@ -14,7 +14,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.8]
+        python-version: [3.9]
     defaults:
       run:
         working-directory: ./app
@@ -34,15 +34,11 @@ jobs:
         pipenv install --system
     - name: Run Tests
       run: |
-        pipenv run python manage.py test
+        python manage.py test
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
       env:
-        SLACK_CHANNEL: general
+        SLACK_CHANNEL: cms
         SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-        SLACK_ICON: https://github.com/rtCamp.png?size=48
-        SLACK_MESSAGE: 'good setup :rocket:'
-        SLACK_TITLE: Foo
-        SLACK_USERNAME: rtCamp
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
