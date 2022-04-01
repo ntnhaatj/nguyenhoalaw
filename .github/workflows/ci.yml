@@ -44,6 +44,7 @@ jobs:
       env:
         HD_DJANGO_SETTINGS_MODULE: "nguyenhoalaw.settings.production"
         HD_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        HD_DJANGO_ALLOWED_HOSTS: "*"
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
