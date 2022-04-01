@@ -10,6 +10,7 @@ python_version = '3.9'
 wagtail = { version = "2.16.1" } 
 django-bootstrap-icons = "*"
 gunicorn = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 nose = '*'
