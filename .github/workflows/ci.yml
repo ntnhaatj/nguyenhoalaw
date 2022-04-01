@@ -46,6 +46,7 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "nguyenhoalaw" #Must be unique in Heroku
         heroku_email: "ntnhat.d@gmail.com"
+        appdir: app
         procfile: |
           web: gunicorn nguyenhoalaw.wsgi
           release: python manage.py migrate
