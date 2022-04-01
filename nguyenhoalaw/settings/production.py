@@ -9,6 +9,9 @@ if not SECRET_KEY:
 
 DEBUG = False
 
+# correct to use deployment env
+ALLOWED_HOSTS = ["*"]
+
 try:
     from .local import *
 except ImportError:
