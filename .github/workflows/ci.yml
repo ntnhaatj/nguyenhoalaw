@@ -39,7 +39,7 @@ jobs:
       run: |
         git --version
         pwd
-        ls -l
+        ls -la
     - name: Deploy
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
@@ -50,6 +50,10 @@ jobs:
         procfile: |
           web: gunicorn nguyenhoalaw.wsgi
           release: python manage.py migrate
+        run: |
+          git --version
+          pwd
+          ls -la
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
