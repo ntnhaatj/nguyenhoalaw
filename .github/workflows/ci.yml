@@ -35,12 +35,19 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+    - name: Tap Step
+      run: |
+        pwd
+        ls -l
     - name: Deploy
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "nguyenhoalaw" #Must be unique in Heroku
         heroku_email: "ntnhat.d@gmail.com"
+        procfile: |
+          web: gunicorn nguyenhoalaw.wsgi
+          release: python manage.py migrate
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
