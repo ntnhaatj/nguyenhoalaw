@@ -15,15 +15,15 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.9]
-#    defaults:
-#      run:
-#        working-directory: ./app
+    defaults:
+      run:
+        working-directory: ./app
         
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-#      with:
-#        path: app
+      with:
+        path: app
 #    - name: Set up Python ${{ matrix.python-version }}
 #      uses: actions/setup-python@v3
 #      with:
@@ -47,9 +47,6 @@ jobs:
         heroku_app_name: "nguyenhoalaw" #Must be unique in Heroku
         heroku_email: "ntnhat.d@gmail.com"
         appdir: app
-        procfile: |
-          web: gunicorn nguyenhoalaw.wsgi
-          release: python manage.py migrate
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
