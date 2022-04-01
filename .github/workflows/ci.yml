@@ -1,4 +1,4 @@
-name: Django CI
+name: CI/CD
 
 on:
   push:
@@ -35,6 +35,12 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+    - name: Deploy
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "nguyenhoalaw" #Must be unique in Heroku
+        heroku_email: "ntnhat.d@gmail.com"
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
