@@ -42,7 +42,7 @@ jobs:
         heroku_app_name: "nguyenhoalaw" #Must be unique in Heroku
         heroku_email: "ntnhat.d@gmail.com"
       env:
-        DJANGO_SETTINGS_MODULE: nguyenhoalaw.settings.production
+        HD_DJANGO_SETTINGS_MODULE: "nguyenhoalaw.settings.production"
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
