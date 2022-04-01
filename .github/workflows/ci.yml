@@ -15,15 +15,10 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.9]
-#    defaults:
-#      run:
-#        working-directory: ./app
         
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-#      with:
-#        path: app
 #    - name: Set up Python ${{ matrix.python-version }}
 #      uses: actions/setup-python@v3
 #      with:
@@ -35,17 +30,19 @@ jobs:
 #    - name: Run Tests
 #      run: |
 #        python manage.py test
-#    - name: Tap Step
-#      run: |
-#        git --version
-#        pwd
-#        ls -la
+    - name: Tap Step
+      run: |
+        git --version
+        pwd
+        ls -la
     - name: Deploy
       uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: "nguyenhoalaw" #Must be unique in Heroku
         heroku_email: "ntnhat.d@gmail.com"
+      env:
+        DJANGO_SETTINGS_MODULE: nguyenhoalaw.settings.production
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2
