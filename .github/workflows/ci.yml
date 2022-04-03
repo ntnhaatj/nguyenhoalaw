@@ -40,11 +40,14 @@ jobs:
         HD_DJANGO_SETTINGS_MODULE: "nguyenhoalaw.settings.staging"
         HD_SECRET_KEY: ${{ secrets.SECRET_KEY }}
         HD_DJANGO_ALLOWED_HOSTS: "*"
-        HD_DB_NAME: "d6av1r0vd7cib"
-        HD_DB_HOST: "ec2-52-30-67-143.eu-west-1.compute.amazonaws.com"
-        HD_DB_PORT: "5432"
-        HD_DB_USER: "eygarumyhgghee"
-        HD_DB_PASSWORD: "5e1a2bf3d9fef751887910a92e882de621458b44754a1d2ff3c6dadce8e57dbd"
+        HD_DB_NAME: ${{ secrets.DB_NAME }}
+        HD_DB_HOST: ${{ secrets.DB_HOST }}
+        HD_DB_PORT: ${{ secrets.DB_PORT }}
+        HD_DB_USER: ${{ secrets.DB_USER }}
+        HD_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        HD_CLOUDINARY_NAME: ${{ secrets.CLOUDINARY_NAME }}
+        HD_CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+        HD_CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
     - name: Slack Notification
       if: always()
       uses: rtCamp/action-slack-notify@v2

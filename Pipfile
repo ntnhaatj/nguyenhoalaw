@@ -11,7 +11,8 @@ wagtail = { version = "2.16.1" }
 django-bootstrap-icons = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
-whitenoise = "*"
+cloudinary = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 nose = '*'

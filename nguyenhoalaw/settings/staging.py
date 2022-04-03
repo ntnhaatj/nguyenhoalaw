@@ -8,7 +8,6 @@ if not SECRET_KEY:
     raise ValueError("SECRET_KEY cannot be empty")
 
 DEBUG = True
-WHITENOISE_AUTOREFRESH = False
 
 # correct to use deployment env
 ALLOWED_HOSTS = ["*"]
@@ -24,11 +23,21 @@ DATABASES = {
     }
 }
 
-MIDDLEWARE += [
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+
+# cloudinary storage for heroku deployment
+INSTALLED_APPS += [
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get("CLOUDINARY_NAME", "foo"),
+    'API_KEY': os.environ.get("CLOUDINARY_API_KEY", "foo"),
+    'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET", "foo"),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
 
 try:
     from .local import *
