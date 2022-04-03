@@ -26,6 +26,7 @@ DATABASES = {
 # cloudinary storage for heroku deployment
 INSTALLED_APPS += [
     'cloudinary_storage',
+    'django.contrib.staticfiles',
     'cloudinary',
 ]
 

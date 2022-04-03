@@ -13,6 +13,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # install django debug toolbar
 INSTALLED_APPS += [
+    'django.contrib.staticfiles',
     "debug_toolbar",
 ]
 
