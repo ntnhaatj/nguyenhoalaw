@@ -7,7 +7,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("SECRET_KEY cannot be empty")
 
-DEBUG = False
+DEBUG = True
+WHITENOISE_AUTOREFRESH = False
 
 # correct to use deployment env
 ALLOWED_HOSTS = ["*"]
