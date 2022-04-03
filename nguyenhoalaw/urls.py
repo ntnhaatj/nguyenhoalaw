@@ -15,6 +15,7 @@ urlpatterns = [
 
 
 if settings.DEBUG:
+    import os
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -22,10 +23,11 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-    # # install django debug toolbar
-    # urlpatterns += [
-    #     path('__debug__/', include('debug_toolbar.urls')),
-    # ]
+    if "dev" in os.environ.get("DJANGO_SETTINGS_MODULE"):
+        # install django debug toolbar for local dev
+        urlpatterns += [
+            path('__debug__/', include('debug_toolbar.urls')),
+        ]
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
