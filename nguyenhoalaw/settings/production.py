@@ -34,6 +34,7 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get("CLOUDINARY_NAME", "foo"),
     'API_KEY': os.environ.get("CLOUDINARY_API_KEY", "foo"),
     'API_SECRET': os.environ.get("CLOUDINARY_API_SECRET", "foo"),
+    'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, "static")
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
