@@ -7,7 +7,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("SECRET_KEY cannot be empty")
 
-DEBUG = False
+DEBUG = True
 
 # correct to use deployment env
 ALLOWED_HOSTS = ["*"]
@@ -23,10 +23,16 @@ DATABASES = {
     }
 }
 
-# cloudinary storage for heroku deployment
+# using whitenoise for serving static files
+MIDDLEWARE += [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# cloudinary storage for heroku deployment only for media files
 INSTALLED_APPS += [
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'cloudinary',
 ]
 
@@ -37,7 +43,6 @@ CLOUDINARY_STORAGE = {
     'STATICFILES_MANIFEST_ROOT': os.path.join(BASE_DIR, "static")
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 
 try:
     from .local import *
