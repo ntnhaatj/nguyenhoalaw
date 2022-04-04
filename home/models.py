@@ -8,6 +8,9 @@ from modelcluster.fields import ParentalKey
 
 class HomePage(Page):
     template = "home/home_page.html"
+    parent_page_types = (Page,)
+    max_count_per_parent = 1
+
     banner_title = models.CharField(max_length=100, blank=True)
     content_panels = Page.content_panels + [
         FieldPanel('banner_title'),

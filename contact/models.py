@@ -18,6 +18,8 @@ class TitleAndTextBlock(StructBlock):
 
 class ContactPage(Page):
     template = "contact/contact_page.html"
+    parent_page_types = ("home.HomePage", )
+    max_count_per_parent = 1
 
     content = StreamField(
         [
