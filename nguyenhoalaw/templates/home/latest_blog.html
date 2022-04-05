@@ -6,7 +6,7 @@
     {% get_latest_blog_posts as posts %}
     <li>
         {% for post in posts %}
-        <ul><a href="{% slugurl 'blog' %}{{ post.slug }}">{{ post.title }}</a></ul>
+        <ul><a href="{% pageurl post %}">{{ post.title }}</a></ul>
         {% endfor %}
     </li>
 </div>

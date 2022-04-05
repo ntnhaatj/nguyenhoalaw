@@ -56,7 +56,7 @@ class BlogIndexPage(Page):
 
         if request.GET.get('category', None):
             category = request.GET.get('category')
-            all_posts = all_posts.filter(categories__slug__contains=[category])
+            all_posts = all_posts.filter(categories__slug__in=[category])
 
         context["posts"] = all_posts
         context["categories"] = request.GET.get('category', None) \
