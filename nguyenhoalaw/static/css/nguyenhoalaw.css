@@ -1,0 +1,7 @@
+* {
+ font-size: 100%;
+ font-family: "Arial";
+}
+h1 { /* 1 priority score, not enough to override Bootstrap jumbotron definition */
+  font-family: "Arial";
+}
