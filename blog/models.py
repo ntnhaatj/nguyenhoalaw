@@ -51,12 +51,12 @@ class BlogIndexPage(Page):
         all_posts = BlogPage.objects.live().public().order_by('-first_published_at')
 
         if request.GET.get('tag', None):
-            tags = request.GET.get('tag')
-            all_posts = all_posts.filter(tags__slug__in=[tags])
+            tag = request.GET.get('tag')
+            all_posts = all_posts.filter(tags__slug__in=[tag])
 
         if request.GET.get('category', None):
             category = request.GET.get('category')
-            all_posts = all_posts.filter(categories__slug__contains=category)
+            all_posts = all_posts.filter(categories__slug__contains=[category])
 
         context["posts"] = all_posts
         context["categories"] = request.GET.get('category', None) \

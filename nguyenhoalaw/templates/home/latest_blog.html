@@ -1,0 +1,12 @@
+{% load blog_tags wagtailcore_tags %}
+
+<div class="container">
+    <h1>Latest blog posts</h1>
+
+    {% get_latest_blog_posts as posts %}
+    <li>
+        {% for post in posts %}
+        <ul><a href="{% slugurl 'blog' %}{{ post.slug }}">{{ post.title }}</a></ul>
+        {% endfor %}
+    </li>
+</div>
