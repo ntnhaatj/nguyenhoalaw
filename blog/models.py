@@ -18,9 +18,11 @@ class BlogCategory(models.Model):
                             allow_unicode=True,
                             max_length=255,
                             help_text="A slug to identify post by category")
+    description = models.TextField(blank=True)
     panels = [
         FieldPanel("name"),
         FieldPanel("slug"),
+        FieldPanel("description")
     ]
 
     class Meta:
@@ -32,6 +34,36 @@ class BlogCategory(models.Model):
         return self.name
 
 
+class BlogIndexPage(Page):
+    parent_page_types = ("home.HomePage", )
+    max_count = 1
+
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full")
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        """Adding custom stuff to our context."""
+        context = super().get_context(request, *args, **kwargs)
+        # Get all posts
+        all_posts = BlogPage.objects.live().public().order_by('-first_published_at')
+
+        if request.GET.get('tag', None):
+            tags = request.GET.get('tag')
+            all_posts = all_posts.filter(tags__slug__in=[tags])
+
+        if request.GET.get('category', None):
+            category = request.GET.get('category')
+            all_posts = all_posts.filter(categories__slug__contains=category)
+
+        context["posts"] = all_posts
+        context["categories"] = request.GET.get('category', None) \
+            or [cat.name for cat in BlogCategory.objects.all()]
+        return context
+
+
 class BlogTags(TaggedItemBase):
     content_object = ParentalKey(
         'blog.BlogPage',
@@ -40,19 +72,8 @@ class BlogTags(TaggedItemBase):
     )
 
 
-class BlogIndexPage(Page):
-    parent_page_types = ("home.HomePage", )
-    max_count_per_parent = 1
-
-    intro = RichTextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
-
-
 class BlogPage(Page):
-    parent_page_types = (BlogIndexPage, )
+    parent_page_types = ("blog.BlogIndexPage", )
 
     date = models.DateField("Post date")
     intro = models.CharField(max_length=255, help_text="Blog post introduction, max length 255")

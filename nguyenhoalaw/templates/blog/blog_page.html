@@ -12,6 +12,10 @@
 
     {{ page.body|richtext }}
 
+    {% for tag in page.tags.all %}
+        <a href="{{ page.get_parent.url }}?tag={{ tag.slug }}">{{ tag }}</a>
+    {% endfor %}
+
     <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 
 {% endblock %}
